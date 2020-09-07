@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <h1>Simple Physics</h1>
+    <script src="p5.min.js"></script>
+    <script src="Ball.js"></script>
+    <script>
+    var ball
+    var r
+    var g
+    var m  
+    var f 
+    var c
+    function setup(){
+      createCanvas(600,600)
+      createDiv('Radius').position(800,100)
+      r=createSlider(10,100,50).position(950,100)
+      createDiv('Mass').position(800,120)
+      m=createSlider(10,100,20).position(950,120)
+      createDiv('Gravity').position(800,140)
+      g=createSlider(0,50,10).position(950,140)
+      createDiv('Friction').position(800,160)
+      c=createSlider(0,5,2).position(950,160)
+      createDiv('Force').position(800,180)
+      f=createSlider(100,300,100).position(950,180)
+      createButton('PRESS HERE').mousePressed(produce).position(800,220)
+      ball=new Ball(width/2,height/2,50,20)
+    }
+    function draw(){
+      ball.r=r.value()
+      ball.m=m.value()
+      background(100)
+      ball.update()
+      ball.edges()
+      ball.gravity(g.value()/100)
+      ball.friction(c.value()/100)
+      ball.display()
+    }
+    function mousePressed() {
+    let pointer = new p5.Vector(mouseX, mouseY)
+    if (pointer.dist(ball.s) < ball.r) {
+      let force=new p5.Vector.sub(pointer, ball.s) 
+      force.normalize() 
+      force.mult(-f.value()) 
+      ball.applyforce(force) 
+    } 
+    }
+    function produce(){
+      ball=new Ball(width/2,height/2,50,20)
+    }
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
