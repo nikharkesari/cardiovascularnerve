@@ -14,17 +14,18 @@
     var c
     function setup(){
       createCanvas(600,600)
-      createDiv('Radius').position(800,100)
-      r=createSlider(10,100,50).position(950,100)
-      createDiv('Mass').position(800,120)
-      m=createSlider(10,100,20).position(950,120)
-      createDiv('Gravity').position(800,140)
-      g=createSlider(0,50,10).position(950,140)
-      createDiv('Friction').position(800,160)
-      c=createSlider(0,5,2).position(950,160)
-      createDiv('Force').position(800,180)
-      f=createSlider(100,300,100).position(950,180)
-      createButton('PRESS HERE').mousePressed(produce).position(800,220)
+      createP('Radius')
+      r=createSlider(10,100,50)
+      createP('Mass')
+      m=createSlider(10,100,20)
+      createP('Gravity')
+      g=createSlider(0,50,10)
+      createP('Friction')
+      c=createSlider(0,5,2)
+      createP('Force')
+      f=createSlider(100,300,100)
+      createP('')
+      createButton('PRESS HERE').mousePressed(reset)
       ball=new Ball(width/2,height/2,50,20)
     }
     function draw(){
@@ -46,12 +47,17 @@
       ball.applyforce(force) 
     } 
     }
-    function produce(){
+    function reset(){
       ball=new Ball(width/2,height/2,50,20)
+      r.value(50);
+      m.value(20);
+      g.value(10);
+      c.value(2);
+      f.value(100);
     }
     </script>
 </head>
-
+<title>Simple Physics</title>
 <body>
 
 </body>
