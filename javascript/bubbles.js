@@ -5,7 +5,7 @@ function setup() {
     background(255);
     createCanvas(displayWidth, displayHeight);
     menu = select('#menu');
-    menu.position(width/2, height/2);
+    menu.position(100, 100);
     menu.mousePressed(start);
 }
 
