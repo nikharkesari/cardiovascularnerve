@@ -2,62 +2,82 @@
 <html>
 
 <head>
+  <script src="libs/p5.min.js"></script>
+  <script src="mylibs/Ball.js"></script>
+</head>
+
+<body>
   <h1>Simple Physics</h1>
-    <script src="libs/p5.min.js"></script>
-    <script src="mylibs/Ball.js"></script>
-    <script>
-    var ball
+  <div id="controls">
+    <div>Radius
+      <input type="range" min="10" max="100" value="50" id="radius">
+    </div>
+    <div>Mass
+      <input type="range" min="10" max="100" value="20" id="mass">
+    </div>
+    <div>Gravity
+      <input type="range" min="0" max="50" value="10" id="gravity">
+    </div>
+    <div> Friction
+      <input type="range" min="0" max="5" value="2" id="friction">
+    </div>
+    <div>Force
+      <input type="range" min="100" max="300" value="100" id="force">
+    </div>
+    <div><button type="button" id="reset_button">RESET</button></div>
+  </div>
+
+  <script>
+    var ball;
+    var controls
     var r
     var g
-    var m  
-    var f 
+    var m
+    var f
     var c
-    function setup(){
-      createCanvas(600,600)
-      createP('Radius')
-      r=createSlider(10,100,50)
-      createP('Mass')
-      m=createSlider(10,100,20)
-      createP('Gravity')
-      g=createSlider(0,50,10)
-      createP('Friction')
-      c=createSlider(0,5,2)
-      createP('Force')
-      f=createSlider(100,300,100)
-      createP('')
-      createButton('PRESS HERE').mousePressed(reset)
-      ball=new Ball(width/2,height/2,50,20)
+    function setup() {
+      controls = select('#controls');
+      r = select('#radius');
+      g = select('#gravity');
+      m = select('#mass');
+      f = select('#force');
+      c = select('#friction');
+      createCanvas(600, 600)
+      controls.position(700, 70)
+      select('#reset_button').mousePressed(reset)
+      ball = new Ball(width / 2, height / 2, 50, 20)
     }
-    function draw(){
-      ball.r=r.value()
-      ball.m=m.value()
+    function draw() {
+      ball.r = r.value()
+      ball.m = m.value()
       background(100)
       ball.update()
       ball.edges()
-      ball.gravity(g.value()/100)
-      ball.friction(c.value()/100)
+      ball.gravity(g.value() / 100)
+      ball.friction(c.value() / 100)
       ball.display()
     }
     function mousePressed() {
-    let pointer = new p5.Vector(mouseX, mouseY)
-    if (pointer.dist(ball.s) < ball.r) {
-      let force=new p5.Vector.sub(pointer, ball.s) 
-      force.normalize() 
-      force.mult(-f.value()) 
-      ball.applyforce(force) 
-    } 
+      let pointer = new p5.Vector(mouseX, mouseY)
+      if (pointer.dist(ball.s) < ball.r) {
+        let force = new p5.Vector.sub(pointer, ball.s)
+        force.normalize()
+        force.mult(-f.value())
+        ball.applyforce(force)
+      }
     }
-    function reset(){
-      ball=new Ball(width/2,height/2,50,20)
+    function reset() {
+      ball = new Ball(width / 2, height / 2, 50, 20)
       r.value(50);
       m.value(20);
       g.value(10);
       c.value(2);
       f.value(100);
     }
-    </script>
-</head>
+  </script>
+</body>
 <title>Simple Physics</title>
+
 <body>
 
 </body>
