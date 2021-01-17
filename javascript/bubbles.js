@@ -3,7 +3,7 @@ var menu;
 var val=false;
 function setup() {
     background(255);
-    createCanvas(displayWidth-5, displayHeight-5);
+    createCanvas(displayWidth, displayHeight);
     menu = select('#menu');
     menu.position(width/2, height/2);
     menu.mousePressed(start);
