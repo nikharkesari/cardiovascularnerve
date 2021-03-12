@@ -1,3 +1,2 @@
 # cardiovascularnerve
-#### checkout my website 
-https://nikharkesari.github.io/cardiovascularnerve/
+#### checkout my website https://nikharkesari.github.io/cardiovascularnerve/
