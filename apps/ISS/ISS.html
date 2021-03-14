@@ -36,15 +36,18 @@
         });
         const marker = L.marker([0, 0], { icon: myIcon }).addTo(mymap)
 
+
         async function getiss() {
             response = await fetch('https://api.wheretheiss.at/v1/satellites/25544');
             data = await response.json();
             const { latitude, longitude } = data;
+            mymap.setView([latitude, longitude], 5)
             marker.setLatLng([latitude, longitude]);
             document.getElementById('lat').textContent = latitude;
             document.getElementById('long').textContent = longitude;
         }
         getiss();
+        setInterval(getiss, 1000)
     </script>
 </body>
 
