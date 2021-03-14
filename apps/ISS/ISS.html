@@ -11,7 +11,7 @@
 
     <style>
         #mapid {
-            height: 180px;
+            height: 300px;
         }
     </style>
 
@@ -22,12 +22,27 @@
 
 
     <script>
-        var mymap = L.map('mapid').setView([51.505, -0.09], 13);
+
+        const mymap = L.map('mapid').setView([0, 0], 1);
+        const attribution = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>';
+        const tileURL = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+        const tiles = L.tileLayer(tileURL, { attribution });
+        tiles.addTo(mymap);
+
+        const myIcon = L.icon({
+            iconUrl: 'iss.png',
+            iconSize: [50, 32],
+            iconAnchor: [25, 16]
+        });
+        const marker = L.marker([0, 0], { icon: myIcon }).addTo(mymap)
+
         async function getiss() {
             response = await fetch('https://api.wheretheiss.at/v1/satellites/25544');
             data = await response.json();
-            document.getElementById('lat').textContent = data.latitude;
-            document.getElementById('long').textContent = data.longitude;
+            const { latitude, longitude } = data;
+            marker.setLatLng([latitude, longitude]);
+            document.getElementById('lat').textContent = latitude;
+            document.getElementById('long').textContent = longitude;
         }
         getiss();
     </script>
