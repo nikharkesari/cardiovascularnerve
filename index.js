@@ -7,6 +7,8 @@ function setup() {
     canvas.style('z-index', '-1');
 }
 a = 0
+// x = width / 2
+// y = width / 2
 function draw() {
     noStroke();
     r = map(noise(a), 0, 1, 0, 255)
@@ -14,5 +16,7 @@ function draw() {
     b = map(noise(a + 20), 0, 1, 0, 255)
     fill(r, g, b, 20);
     a += 0.01
-    ellipse(randomGaussian(mouseX, 20), randomGaussian(mouseY, 20), 30, 30);
+    for (i = 0; i < 5; i++) {
+        ellipse(randomGaussian(mouseX, 20), randomGaussian(mouseY, 20), 30, 30);
+    }
 }
