@@ -2,13 +2,14 @@ var ai;
 a = 0;
 flag = false;
 function windowResized() {
-    resiveCanvas(windowWidth, windowHeight)
+    resizeCanvas(windowWidth, windowHeight);
 }
 function setup() {
     canvas = createCanvas(windowWidth, windowHeight);
     canvas.position(0, 0);
     canvas.style('z-index', '-1');
-    select('#autodraw').mousePressed(autodraw)
+    select('#autodraw').mousePressed(autodraw);
+    select('#clear').mousePressed(clearscreen);
 }
 function draw() {
     noStroke();
@@ -19,7 +20,7 @@ function draw() {
     a += 0.01
 
     if (flag == true) {
-        ai.seek(ai.wander(), 1);
+        ai.seek(ai.wander(0.8), 0.5, true);
         for (i = 0; i < 5; i++) {
             ellipse(randomGaussian(ai.s.x, 20), randomGaussian(ai.s.y, 20), 30, 30);
         }
@@ -34,4 +35,9 @@ function draw() {
 function autodraw() {
     ai = new AIUI(windowWidth / 2, windowHeight / 2, 10);
     flag = !flag;
+}
+
+function clearscreen() {
+    clear();
+    flag = false;
 }
