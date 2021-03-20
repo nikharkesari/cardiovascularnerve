@@ -4,6 +4,7 @@ class AIUI {
     this.v = new p5.Vector(0, 0);
     this.a = new p5.Vector(0, 0);
     this.maxspeed = ms;
+    this.wandertheta = 0;
   }
   seek(target, force) {
     this.maxforce = force;
@@ -23,7 +24,7 @@ class AIUI {
     this.s.add(this.v);
     this.a.mult(0);
   }
-  aim(target,force){
+  aim(target, force) {
     this.maxforce = force;
     let desired = new p5.Vector.sub(target, this.s);
     let distance = desired.mag();
@@ -50,5 +51,19 @@ class AIUI {
     vertex(r, r * 2);
     endShape(CLOSE);
     resetMatrix();
+  }
+  wander() {
+    let wanderR = 25;         // Radius for our "wander circle"
+    let wanderD = 80;         // Distance for our "wander circle"
+    let change = 0.3;
+    this.wandertheta += random(-change, change);     // Randomly change wander theta
+
+    this.circlepos = this.v.copy();
+    this.circlepos.normalize();
+    this.circlepos.mult(wanderD);
+    this.circlepos.add(this.s);
+    this.h = this.v.heading();
+    let circleOffSet = new p5.Vector(wanderR * cos(this.wandertheta + this.h), wanderR * sin(this.wandertheta + this.h));
+    return p5.Vector.add(this.circlepos, circleOffSet);
   }
 }
