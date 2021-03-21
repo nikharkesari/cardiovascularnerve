@@ -20,7 +20,7 @@ function draw() {
     a += 0.01
 
     if (flag == true) {
-        ai.seek(ai.wander(0.8), 0.5, true);
+        ai.seek(ai.wander(1), 5, true);
         for (i = 0; i < 5; i++) {
             ellipse(randomGaussian(ai.s.x, 20), randomGaussian(ai.s.y, 20), 30, 30);
         }
